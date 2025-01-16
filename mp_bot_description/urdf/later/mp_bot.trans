@@ -1,0 +1,158 @@
+<?xml version="1.0" ?>
+<robot name="mp_bot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+<transmission name="right_wheel_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="right_wheel_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="right_wheel_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="left_wheel_joint_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="left_wheel_joint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="left_wheel_joint_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fr_tibia_to_femur_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fr_tibia_to_femur">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fr_tibia_to_femur_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fr_femur_to_coxa_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fr_femur_to_coxa">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fr_femur_to_coxa_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fr_coxa_to_baselink_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fr_coxa_to_baselink">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fr_coxa_to_baselink_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fl_tibia_to_femur_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fl_tibia_to_femur">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fl_tibia_to_femur_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fl_femur_to_coxa_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fl_femur_to_coxa">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fl_femur_to_coxa_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="fl_coxa_to_baselink_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="fl_coxa_to_baselink">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="fl_coxa_to_baselink_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rr_tibia_to_femur_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rr_tibia_to_femur">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rr_tibia_to_femur_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rr_femur_to_coxa_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rr_femur_to_coxa">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rr_femur_to_coxa_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rr_coxa_to_baselink_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rr_coxa_to_baselink">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rr_coxa_to_baselink_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rl_tibia_to_femur_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rl_tibia_to_femur">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rl_tibia_to_femur_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rl_femur_to_coxa_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rl_femur_to_coxa">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rl_femur_to_coxa_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="rl_coxa_to_baselink_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rl_coxa_to_baselink">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="rl_coxa_to_baselink_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+</robot>

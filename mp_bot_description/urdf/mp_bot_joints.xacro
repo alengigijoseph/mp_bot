@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    
+    <xacro:include filename="consts.xacro" /> 
+
+    <!-- Joint Limits -->
+    <xacro:macro name="bl_to_coxa_limits">
+    <limit upper="1.658063" lower="-0.523599" velocity="${velocity}" effort="${effort}"/> <!-- effort = 7 -->
+    </xacro:macro>
+    <xacro:macro name="coxa_to_femur_limits">
+    <limit upper="0.087266" lower="-2.70526" velocity="${velocity}" effort="${effort}"/>
+    </xacro:macro>
+    <xacro:macro name="femur_to_tibia_limits">
+    <limit upper="0.087266" lower="-2.70526" velocity="${velocity}" effort="${effort}"/>
+    </xacro:macro>
+
+    <joint name="bf_to_bl" type="fixed">
+      <child link="base_footprint"/>
+      <parent link="base_link"/>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+  
+
+    <joint name="right_wheel_joint" type="continuous">
+        <origin xyz="0.001317 -0.103966 0.04" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="right_wheel_1"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <dynamics damping="0.1" friction="0.1"/>
+      </joint>
+      
+      <joint name="left_wheel_joint" type="continuous">
+        <origin xyz="0.001317 0.103646 0.04" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="left_wheel_1"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <dynamics damping="0.1" friction="0.1"/>
+      </joint>
+      
+      <joint name="lidar_joint" type="fixed">
+        <origin xyz="0.136787 0.001257 0.065194" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="lidar_1"/>
+      </joint>
+      
+      <joint name="fr_sensor_to_tibia" type="fixed">
+        <origin xyz="0.043255 0.0258 -0.115033" rpy="0 0 0"/>
+        <parent link="fr_tibia_1"/>
+        <child link="fr_sensor_1"/>
+      </joint>
+      
+      <joint name="fr_tibia_to_femur" type="revolute">
+        <origin xyz="0.0 -1e-06 0.08" rpy="0 0 0"/>
+        <parent link="fr_femur_1"/>
+        <child link="fr_tibia_1"/>
+        <axis xyz="-0.0 1.0 0.0"/>
+        <xacro:femur_to_tibia_limits></xacro:femur_to_tibia_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="fr_femur_to_coxa" type="revolute">
+        <origin xyz="0.04349 -0.0258 0.0185" rpy="0 0 0"/>
+        <parent link="fr_coxa_1"/>
+        <child link="fr_femur_1"/>
+        <axis xyz="0.0 -1.0 0.0"/>
+        <xacro:coxa_to_femur_limits></xacro:coxa_to_femur_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="fr_coxa_to_baselink" type="revolute">
+        <origin xyz="0.163597 -0.128191 0.031765" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="fr_coxa_1"/>
+        <axis xyz="-0.0 -0.0 -1.0"/>
+        <xacro:bl_to_coxa_limits></xacro:bl_to_coxa_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="fl_sensor_to_tibia" type="fixed">
+        <origin xyz="0.043255 -0.0258 -0.115033" rpy="0 0 0"/>
+        <parent link="fl_tibia_1"/>
+        <child link="fl_sensor_1"/>
+      </joint>
+      
+      <joint name="fl_tibia_to_femur" type="revolute">
+        <origin xyz="0.0 1e-06 0.08" rpy="0 0 0"/>
+        <parent link="fl_femur_1"/>
+        <child link="fl_tibia_1"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <xacro:femur_to_tibia_limits></xacro:femur_to_tibia_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="fl_femur_to_coxa" type="revolute">
+        <origin xyz="0.04349 0.0258 0.0185" rpy="0 0 0"/>
+        <parent link="fl_coxa_1"/>
+        <child link="fl_femur_1"/>
+        <axis xyz="-0.0 -1.0 -0.0"/>
+        <xacro:coxa_to_femur_limits></xacro:coxa_to_femur_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="fl_coxa_to_baselink" type="revolute">
+        <origin xyz="0.163597 0.128191 0.031765" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="fl_coxa_1"/>
+        <axis xyz="0.0 -0.0 1.0"/>
+        <xacro:bl_to_coxa_limits></xacro:bl_to_coxa_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rr_sensor_to_tibia" type="fixed">
+        <origin xyz="-0.043255 0.0258 -0.115033" rpy="0 0 0"/>
+        <parent link="rr_tibia_1"/>
+        <child link="rr_sensor_1"/>
+      </joint>
+      
+      <joint name="rr_tibia_to_femur" type="revolute">
+        <origin xyz="0.0 -1e-06 0.08" rpy="0 0 0"/>
+        <parent link="rr_femur_1"/>
+        <child link="rr_tibia_1"/>
+        <axis xyz="-0.0 -1.0 0.0"/>
+        <xacro:femur_to_tibia_limits></xacro:femur_to_tibia_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rr_femur_to_coxa" type="revolute">
+        <origin xyz="-0.04349 -0.0258 0.0185" rpy="0 0 0"/>
+        <parent link="rr_coxa_1"/>
+        <child link="rr_femur_1"/>
+        <axis xyz="0.0 1.0 -0.0"/>
+        <xacro:coxa_to_femur_limits></xacro:coxa_to_femur_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rr_coxa_to_baselink" type="revolute">
+        <origin xyz="-0.163597 -0.128191 0.031765" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="rr_coxa_1"/>
+        <axis xyz="-0.0 0.0 1.0"/>
+        <xacro:bl_to_coxa_limits></xacro:bl_to_coxa_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rl_sensor_to_tibia" type="fixed">
+        <origin xyz="-0.043255 -0.0258 -0.115033" rpy="0 0 0"/>
+        <parent link="rl_tibia_1"/>
+        <child link="rl_sensor_1"/>
+      </joint>
+      
+      <joint name="rl_tibia_to_femur" type="revolute">
+        <origin xyz="0.0 1e-06 0.08" rpy="0 0 0"/>
+        <parent link="rl_femur_1"/>
+        <child link="rl_tibia_1"/>
+        <axis xyz="0.0 -1.0 -0.0"/>
+        <xacro:femur_to_tibia_limits></xacro:femur_to_tibia_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rl_femur_to_coxa" type="revolute">
+        <origin xyz="-0.04349 0.0258 0.022" rpy="0 0 0"/>
+        <parent link="rl_coxa_1"/>
+        <child link="rl_femur_1"/>
+        <axis xyz="-0.0 1.0 0.0"/>
+        <xacro:coxa_to_femur_limits></xacro:coxa_to_femur_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+      
+      <joint name="rl_coxa_to_baselink" type="revolute">
+        <origin xyz="-0.163597 0.128191 0.031765" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="rl_coxa_1"/>
+        <axis xyz="0.0 0.0 -1.0"/>
+        <xacro:bl_to_coxa_limits></xacro:bl_to_coxa_limits>
+        <xacro:joint_dynamics></xacro:joint_dynamics>
+      </joint>
+
+</robot>

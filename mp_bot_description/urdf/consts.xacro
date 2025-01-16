@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="velocity"       value="1"/>
+    <xacro:property name="effort"         value="10"/>
+
+    <xacro:macro name="joint_dynamics">
+        <dynamics damping="0.01" friction="10000"/>
+    </xacro:macro>
+
+    <xacro:property name="chassis_mass" value="4"/>
+
+    <xacro:property name="coxa_mass" value="0.3"/>
+
+    <xacro:property name="femur_mass" value="0.5"/>
+
+    <xacro:property name="tibia_mass" value="0.2"/>
+
+    <xacro:property name="wheel_mass" value="0.5"/>
+
+    <xacro:property name="foot_mass" value="0.1"/>
+    <xacro:property name="foot_radius" value="0.01"/>
+
+</robot>

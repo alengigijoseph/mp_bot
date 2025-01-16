@@ -1,0 +1,521 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find mp_bot_description)/urdf/materials.xacro" />
+<xacro:include filename="consts.xacro" /> 
+<xacro:include filename="inertial_macros.xacro"/>
+
+<link name="base_footprint">
+</link>
+
+<link name="base_link">
+  <!-- <inertial>
+    <origin xyz="0.00828877197593097 8.515854491264463e-05 0.0490244599800086" rpy="0 0 0"/>
+    <mass value="${chassis_mass}"/>
+    <inertia ixx="0.016" iyy="0.020209" izz="0.034031" ixy="-2.3e-05" iyz="2e-06" ixz="0.000235"/>
+  </inertial> -->
+  <xacro:inertial_box mass="${chassis_mass}" x="0.3" y="0.27" z="0.07">
+      <origin xyz="0 0 0.0490244599800086" rpy="0 0 0"/>
+  </xacro:inertial_box>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Wheels -->
+<link name="right_wheel_1">
+  <!-- <inertial>
+    <origin xyz="-4.622113018955872e-07 -0.009999774407853698 -6.938893903907228e-17" rpy="0 0 0"/>
+    <mass value="${wheel_mass}"/>
+    <inertia ixx="4.1e-05" iyy="7.5e-05" izz="4.1e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial> -->
+  <xacro:inertial_cylinder mass="${wheel_mass}" length="0.02" radius="0.04">
+      <origin xyz="-4.622113018955872e-07 -0.009999774407853698 -6.938893903907228e-17" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  <visual>
+    <origin xyz="-0.001317 0.103966 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="-0.001317 0.103966 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+  <collision>
+    <origin xyz="0 -0.01 0" rpy="0 0 0"/>
+    <geometry>
+        <sphere radius="0.04"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <!-- <inertial>
+    <origin xyz="-4.6221130452456065e-07 0.01000004880099159 -2.0816681711721685e-17" rpy="0 0 0"/>
+    <mass value="${wheel_mass}"/>
+    <inertia ixx="4.1e-05" iyy="7.5e-05" izz="4.1e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial> -->
+  <xacro:inertial_cylinder mass="${wheel_mass}" length="0.02" radius="0.04">
+      <origin xyz="-4.622113018955872e-07 -0.009999774407853698 -6.938893903907228e-17" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  <visual>
+    <origin xyz="-0.001317 -0.103646 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.01 0" rpy="0 0 0"/>
+    <geometry>
+        <sphere radius="0.04"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Lidar -->
+<link name="lidar_1">
+  <!-- <inertial>
+    <origin xyz="-3.2539981470458557e-07 4.889123833709888e-07 0.009999903411049893" rpy="0 0 0"/>
+    <mass value="0.1"/>
+    <inertia ixx="2.4e-05" iyy="2.4e-05" izz="4.3e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial> -->
+  <xacro:inertial_cylinder mass="0.1" length="0.02" radius="0.01">
+       <origin xyz="-3.2539981470458557e-07 4.889123833709888e-07 0.009999903411049893" rpy="0 0 0"/>
+  </xacro:inertial_cylinder>
+  <visual>
+    <origin xyz="-0.136787 -0.001257 -0.065194" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.136787 -0.001257 -0.065194" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Front right leg -->
+<link name="fr_sensor_1">
+  <inertial>
+    <origin xyz="0.00021068827937070767 3.233505975225315e-06 0.005204260781467315" rpy="0 0 0"/>
+    <!-- <mass value="0.001205616254827141"/> -->
+    <mass value="${foot_mass}"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.250342 0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="-0.250342 0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry> 
+  </collision> -->
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="${foot_radius}"/>
+    </geometry>
+    <surface>
+      <friction>
+          <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+          </ode>
+      </friction>
+  </surface>
+  </collision>
+</link>
+
+<link name="fr_tibia_1">
+  <inertial>
+    <origin xyz="0.019506120656936105 0.02620049405704164 -0.02220841719794582" rpy="0 0 0"/>
+    <!-- <mass value="0.07968835518475603"/> -->
+    <mass value="${tibia_mass}"/>
+    <inertia ixx="9e-05" iyy="0.000116" izz="4.3e-05" ixy="1e-06" iyz="-1e-06" ixz="4.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.207087 0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.207087 0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fr_femur_1">
+  <inertial>
+    <origin xyz="-4.7607624194812015e-05 0.02626476056131416 0.04000394221853656" rpy="0 0 0"/>
+    <!-- <mass value="0.17517059926220274"/> -->
+    <mass value="${femur_mass}"/>
+    <inertia ixx="0.000231" iyy="0.000127" izz="0.000114" ixy="0.0" iyz="-3e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.207087 0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.207087 0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fr_coxa_1">
+  <inertial>
+    <origin xyz="0.036173883187007205 0.0004394165992846477 0.02240570217177252" rpy="0 0 0"/>
+    <!-- <mass value="0.45483033887461133"/> -->
+    <mass value="${coxa_mass}"/>
+    <inertia ixx="0.000241" iyy="0.000284" izz="0.000143" ixy="-1e-06" iyz="1e-06" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.163597 0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.163597 0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fr_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Front left leg -->
+<link name="fl_sensor_1">
+  <inertial>
+    <origin xyz="0.00021068827937564816 -3.2335059825805423e-06 0.005204260781555314" rpy="0 0 0"/>
+    <mass value="${foot_mass}"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.250342 -0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="-0.250342 -0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="${foot_radius}"/>
+    </geometry>
+    <surface>
+      <friction>
+          <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+          </ode>
+      </friction>
+  </surface>
+  </collision>
+</link>
+
+<link name="fl_tibia_1">
+  <inertial>
+    <origin xyz="0.019506122296028133 -0.026200492501178035 -0.022208420704323786" rpy="0 0 0"/>
+    <mass value="${tibia_mass}"/>
+    <inertia ixx="9e-05" iyy="0.000116" izz="4.3e-05" ixy="-1e-06" iyz="1e-06" ixz="4.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.207087 -0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.207087 -0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fl_femur_1">
+  <inertial>
+    <origin xyz="-4.760827730734829e-05 -0.02626476103913486 0.040003939822761216" rpy="0 0 0"/>
+    <mass value="${femur_mass}"/>
+    <inertia ixx="0.000231" iyy="0.000127" izz="0.000114" ixy="-0.0" iyz="3e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.207087 -0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.207087 -0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fl_coxa_1">
+  <inertial>
+    <origin xyz="0.036173883394527706 -0.0004394170609956505 0.02240570183024746" rpy="0 0 0"/>
+    <mass value="${coxa_mass}"/>
+    <inertia ixx="0.000241" iyy="0.000284" izz="0.000143" ixy="1e-06" iyz="-1e-06" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.163597 -0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.163597 -0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/fl_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Rear right leg -->
+<link name="rr_sensor_1">
+  <inertial>
+    <origin xyz="-0.00021068827937564816 3.2335059825805423e-06 0.005204260781555314" rpy="0 0 0"/>
+    <mass value="${foot_mass}"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.250342 0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0.250342 0.128192 -0.015232" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="${foot_radius}"/>
+    </geometry>
+    <surface>
+      <friction>
+          <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+          </ode>
+      </friction>
+  </surface>
+  </collision>
+</link>
+
+<link name="rr_tibia_1">
+  <inertial>
+    <origin xyz="-0.019506122296028133 0.026200492501178035 -0.022208420704323786" rpy="0 0 0"/>
+    <mass value="${tibia_mass}"/>
+    <inertia ixx="9e-05" iyy="0.000116" izz="4.3e-05" ixy="-1e-06" iyz="-1e-06" ixz="-4.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.207087 0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.207087 0.153992 -0.130265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rr_femur_1">
+  <inertial>
+    <origin xyz="4.760827730734829e-05 0.02626476103913486 0.040003939822761216" rpy="0 0 0"/>
+    <mass value="${femur_mass}"/>
+    <inertia ixx="0.000231" iyy="0.000127" izz="0.000114" ixy="-0.0" iyz="-3e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.207087 0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.207087 0.153991 -0.050265" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rr_coxa_1">
+  <inertial>
+    <origin xyz="-0.036173883394527706 0.0004394170609956505 0.02240570183024746" rpy="0 0 0"/>
+    <mass value="${coxa_mass}"/>
+    <inertia ixx="0.000241" iyy="0.000284" izz="0.000143" ixy="1e-06" iyz="1e-06" ixz="4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.163597 0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.163597 0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rr_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<!-- Rear left leg -->
+<link name="rl_sensor_1">
+  <inertial>
+    <origin xyz="-0.00021068827937048562 -3.233505975613893e-06 0.005204260781466779" rpy="0 0 0"/>
+    <mass value="${foot_mass}"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.250342 -0.128192 -0.018732" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <!-- <collision>
+    <origin xyz="0.250342 -0.128192 -0.018732" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision> -->
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="${foot_radius}"/>
+    </geometry>
+    <surface>
+      <friction>
+          <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+          </ode>
+      </friction>
+  </surface>
+  </collision>
+</link>
+
+<link name="rl_tibia_1">
+  <inertial>
+    <origin xyz="-0.019506120656935882 -0.02620049405704919 -0.022208417197946362" rpy="0 0 0"/>
+    <mass value="${tibia_mass}"/>
+    <inertia ixx="9e-05" iyy="0.000116" izz="4.3e-05" ixy="1e-06" iyz="1e-06" ixz="-4.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.207087 -0.153992 -0.133765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.207087 -0.153992 -0.133765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_tibia_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rl_femur_1">
+  <inertial>
+    <origin xyz="4.760762419503406e-05 -0.02626476056132021 0.040003942218535975" rpy="0 0 0"/>
+    <mass value="${femur_mass}"/>
+    <inertia ixx="0.000231" iyy="0.000127" izz="0.000114" ixy="0.0" iyz="3e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.207087 -0.153991 -0.053765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.207087 -0.153991 -0.053765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_femur_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="rl_coxa_1">
+  <inertial>
+    <origin xyz="-0.036173883187006955 -0.0004394165992877841 0.025905702171771947" rpy="0 0 0"/>
+    <mass value="${coxa_mass}"/>
+    <inertia ixx="0.000241" iyy="0.000284" izz="0.000143" ixy="-1e-06" iyz="-1e-06" ixz="4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.163597 -0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.163597 -0.128191 -0.031765" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="file://$(find mp_bot_description)/meshes/rl_coxa_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+
+
+</robot>

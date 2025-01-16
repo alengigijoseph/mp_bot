@@ -1,0 +1,99 @@
+controller_manager:
+  ros__parameters:
+
+    update_rate: 1000 # Hz
+
+    diff_cont:
+      type: diff_drive_controller/DiffDriveController
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    gazebo_joint_controller:
+      type: forward_command_controller/ForwardCommandController
+
+diff_cont:
+  ros__parameters:
+
+    publish_rate: 100.0 #50.0
+
+    base_frame_id: base_link
+
+    left_wheel_names: ['left_wheel_joint']
+    right_wheel_names: ['right_wheel_joint']
+    wheel_separation: 0.227612 
+    wheel_radius: 0.04
+
+    use_stamped_vel: false
+    
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - fr_coxa_to_baselink
+      - fr_femur_to_coxa
+      - fr_tibia_to_femur
+      - fl_coxa_to_baselink
+      - fl_femur_to_coxa
+      - fl_tibia_to_femur
+      - rr_coxa_to_baselink
+      - rr_femur_to_coxa
+      - rr_tibia_to_femur
+      - rl_coxa_to_baselink
+      - rl_femur_to_coxa
+      - rl_tibia_to_femur
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: false
+    constraints:
+      stopped_velocity_tolerance: 0.01
+      goal_time: 0.0
+      fr_coxa_to_baselink: { trajectory: 0.05, goal: 0.03 }
+      fr_femur_to_coxa: { trajectory: 0.05, goal: 0.03 }
+      fr_tibia_to_femur: { trajectory: 0.05, goal: 0.03 }
+
+      fl_coxa_to_baselink: { trajectory: 0.05, goal: 0.03 }
+      fl_femur_to_coxa: { trajectory: 0.05, goal: 0.03 }
+      fl_tibia_to_femur: { trajectory: 0.05, goal: 0.03 }
+
+      rr_coxa_to_baselink: { trajectory: 0.05, goal: 0.03 }
+      rr_femur_to_coxa: { trajectory: 0.05, goal: 0.03 }
+      rr_tibia_to_femur: { trajectory: 0.05, goal: 0.03 }
+
+      rl_coxa_to_baselink: { trajectory: 0.05, goal: 0.03 }
+      rl_femur_to_coxa: { trajectory: 0.05, goal: 0.03 }
+      rl_tibia_to_femur: { trajectory: 0.05, goal: 0.03 }
+
+
+gazebo_joint_controller:
+  ros__parameters:
+    joints:
+      - fr_coxa_to_baselink
+      - fr_femur_to_coxa
+      - fr_tibia_to_femur
+      - fl_coxa_to_baselink
+      - fl_femur_to_coxa
+      - fl_tibia_to_femur
+      - rr_coxa_to_baselink
+      - rr_femur_to_coxa
+      - rr_tibia_to_femur
+      - rl_coxa_to_baselink
+      - rl_femur_to_coxa
+      - rl_tibia_to_femur
+    interface_name: position
+    command_interfaces:
+      - position 
+    state_interfaces:
+      - position
+      - velocity
+      - effort
+
+
