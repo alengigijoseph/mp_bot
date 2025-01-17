@@ -64,9 +64,8 @@
           <state_interface name="position"/>
       </joint>
     </ros2_control>
-  </xacro:if>
 
-  <ros2_control name="fr_arm" type="system">
+    <ros2_control name="fr_arm" type="system">
 
     <hardware>
       <plugin>gazebo_ros2_control/GazeboSystem</plugin>
@@ -289,10 +288,13 @@
     </joint>
 
   </ros2_control>
+  </xacro:if>
+
+  
   
     <gazebo>
       <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-          <parameters>$(find mp_bot_description)/config/mp_controllers.yaml</parameters>
+          <parameters>$(find mp_bot_robot)/config/mp_controllers.yaml</parameters>
           <parameters>$(find mp_bot_description)/config/gaz_ros2_ctl_use_sim.yaml</parameters>
       </plugin>
   </gazebo>
