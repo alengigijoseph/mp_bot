@@ -72,11 +72,11 @@ def generate_launch_description():
         arguments=["joint_broad"],
     )
 
-    joint_trajectory_controller = Node(
+    """ joint_trajectory_controller = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_trajectory_controller"],
-    )
+    ) """
 
     return LaunchDescription([
         robot_state_publisher_node,
@@ -86,5 +86,5 @@ def generate_launch_description():
         urdf_spawn_node,
         diff_drive_spawner,
         joint_broad_spawner,
-        joint_trajectory_controller
+        #joint_trajectory_controller
     ])
