@@ -21,10 +21,10 @@ def generate_launch_description():
     xacro_file = os.path.join(get_package_share_directory('mp_bot_description'), 'urdf', 'robot.urdf.xacro')
     #robot_description_config = xacro.process_file(xacro_file)
     #robot_urdf = robot_description_config.toxml()
-    robot_description_config = Command(['xacro ', xacro_file, ' sim_mode:=', 'false'])
+    robot_description_config = Command(['xacro ', xacro_file, ' sim_mode:=', 'true'])
     
 
-    params = {'robot_description': robot_description_config, 'use_sim_time': False}
+    params = {'robot_description': robot_description_config, 'use_sim_time': True}
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
